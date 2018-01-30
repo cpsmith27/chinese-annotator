@@ -1,4 +1,5 @@
-require_relative 'hsk.rb'
+require_relative 'lib/hsk.rb'
+require_relative 'lib/pinyinAccents.rb'
 
 class Dictionary
 
