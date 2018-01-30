@@ -24,6 +24,8 @@ class Dictionary
         simp = tokens[1]
 
         pinyin = line.match(/\[[a-zA-Z0-9[:punct:] ]*?\]/).to_s
+        pinyin.gsub!(/^\[/, '')
+        pinyin.gsub!(/\]$/, '')
 
         defi_raw = line.match(/\/.*\//).to_s
         defi = defi_raw[1..-2].split("/")
