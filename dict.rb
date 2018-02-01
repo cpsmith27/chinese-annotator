@@ -24,14 +24,16 @@ class Dictionary
         trad = tokens.first
         simp = tokens[1]
 
-        pinyin = line.match(/\[[a-zA-Z0-9[:punct:] ]*?\]/).to_s
-        pinyin.gsub!(/^\[/, '')
-        pinyin.gsub!(/\]$/, '')
+        pinyin_raw = line.match(/\[[a-zA-Z0-9[:punct:] ]*?\]/).to_s
+        pinyin_raw.gsub!(/^\[/, '')
+        pinyin_raw.gsub!(/\]$/, '')
+        pinyin = pinyinAccents(pinyin_raw)
 
         defi_raw = line.match(/\/.*\//).to_s
         defi = defi_raw[1..-2].split("/")
         defi.each do |d|
-          d.gsub!(/\p{Han}/){|han| "<span class=\"han\">#{han}</span><i class=\"hide fa fa-square-o\" aria-hidden=\"true\"></i>"}
+          d.gsub!(/\p{Han}/) {|han| "<span class=\"han\">#{han}</span>"}
+          d.gsub!(/\[[a-zA-Z]+[1-5]\]/) {|pin| pinyinAccents(pin)}
         end
 
         hsk_level = hsk.getLevel(simp)

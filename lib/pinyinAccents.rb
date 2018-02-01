@@ -12,10 +12,9 @@ def pinyinAccents(numbered)
     'v': ['ǖ', 'ǘ', 'ǚ', 'ǜ', 'ü']
   }
 
+  output = []
   tokens.each do |t|
-    print "#{t}  =>  "
-
-    if t.match(/^[a-zA-Z]+[1-5]$/)
+    if t.match(/^\[?[a-zA-Z]+[1-5]\]?$/)
       tone = t.match(/[1-5]/).to_s.to_i - 1
       t.gsub!(/[1-5]/, '')
 
@@ -38,8 +37,8 @@ def pinyinAccents(numbered)
       end
     end
 
-    puts t
+    output.push t
   end
-end
 
-pinyinAccents("ia1 ia2 ia3 ia4 ia5 iao1 iao2 iao3 iao4 iao5")
+  return output.join(' ')
+end
