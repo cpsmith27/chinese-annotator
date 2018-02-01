@@ -1,5 +1,5 @@
-require_relative 'lib/hsk.rb'
-require_relative 'lib/pinyinAccents.rb'
+require_relative './hsk.rb'
+require_relative './pinyinAccents.rb'
 
 class Dictionary
 
@@ -139,8 +139,3 @@ class Dictionary
     @dict[word.length][word] rescue nil
   end
 end
-
-dict = Dictionary.new
-dict.readU8("data/cedict.u8")
-dict.compile('data/compiledDict.o')
-dict.readO('data/compiledDict.o')
