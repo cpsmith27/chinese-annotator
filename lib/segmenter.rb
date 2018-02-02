@@ -1,3 +1,5 @@
+require_relative 'node.rb'
+
 class Segmenter
   def initialize(dictionary)
     @dict = dictionary
@@ -17,16 +19,14 @@ class Segmenter
 
       while wordEnd >= pos
         slice = line[pos..wordEnd]
-        isEntry = @dict.entries(slice) != nil
-
-        #puts "line[#{pos}..#{wordEnd}]\t\t#{slice}\t\t#{isEntry}"
+        entries = @dict.entries(slice)
 
         if wordEnd == pos
-          output.push slice
+          output.push Node.new(slice, entries, nil)
           break
-        elsif isEntry
+        elsif entries != nil
           breakDown = segmentMM(slice, slice.length - 1)
-          output.push [slice, breakDown]
+          output.push Node.new(slice, entries, breakDown)
           break
         end
 
@@ -36,7 +36,6 @@ class Segmenter
       pos = wordEnd + 1
     end
 
-    puts output.inspect
     output
   end
 end

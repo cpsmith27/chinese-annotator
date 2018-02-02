@@ -9,3 +9,4 @@ puts dict.stats
 
 seg = Segmenter.new(dict)
 seg.segmentMM('这些学生会游泳', 5)
+seg.segmentMM('一帆风顺', 5)
