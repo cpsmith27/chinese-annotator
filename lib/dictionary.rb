@@ -101,7 +101,7 @@ class Dictionary
 
         tokens = line.split("\t")
 
-        length = tokens.delete_at(0)
+        length = tokens.delete_at(0).to_i # make sure this is a number
         simp = tokens.delete_at(0)
         trad = tokens.delete_at(0)
         pinyin = tokens.delete_at(0)
@@ -137,5 +137,40 @@ class Dictionary
 
   def entries(word)
     @dict[word.length][word] rescue nil
+  end
+
+  def maxLength()
+    @dict.keys.max
+  end
+
+  def numberOfHeadWords()
+    total = 0
+    @dict.each do |length, headWordEntries|
+      total += headWordEntries.size
+    end
+
+    total
+  end
+
+  def stats()
+    puts '================================='
+    puts 'Stats:'
+    puts ''
+
+    l = @dict.keys.max - 1
+    totalSize = self.numberOfHeadWords
+
+    puts "Number of Head Words: #{totalSize}"
+
+    previousPercentage = 0
+    (1..l).each do |length|
+      size = @dict[length].size
+      slicePercentage = size.to_f / totalSize * 100
+      accuPercentage = previousPercentage + slicePercentage
+
+      puts "Words of length #{length}: #{size} (slice: #{slicePercentage.round(2)}%, accumulated: #{accuPercentage.round(2)}%)"
+
+      previousPercentage = accuPercentage
+    end
   end
 end
