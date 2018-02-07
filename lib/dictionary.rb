@@ -152,10 +152,8 @@ class Dictionary
     total
   end
 
-  def stats()
-    puts '================================='
-    puts 'Stats:'
-    puts ''
+  def putStats()
+    puts '=============== Dictionary ==============='
 
     l = @dict.keys.max - 1
     totalSize = self.numberOfHeadWords
@@ -172,5 +170,7 @@ class Dictionary
 
       previousPercentage = accuPercentage
     end
+
+    puts '=========================================='
   end
 end

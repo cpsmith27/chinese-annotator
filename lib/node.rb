@@ -16,4 +16,17 @@ class Node
   def getChildren
     @children
   end
+
+  def html
+    if @children == nil
+      "<span>#{@expression}</span>"
+    else
+      htmls = []
+      @children.each do |c|
+        htmls.push c.html
+      end
+
+      return "<span>#{htmls.join('')}</span>"
+    end
+  end
 end

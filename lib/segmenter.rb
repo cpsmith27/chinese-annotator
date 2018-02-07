@@ -39,7 +39,3 @@ class Segmenter
     output
   end
 end
-
-
-#['zhe xie', 'defi', ['zhe', 'defi'], ['xie', 'defi']]
-#['xue sheng hui', 'defi', ['xue sheng', 'defi', ['xue', 'defi'], ['sheng', 'defi']], ['hui', 'defi']]
