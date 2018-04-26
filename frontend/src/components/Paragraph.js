@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import SegmentGroup from "./SegmentGroup.js";
+import SegmentationGroup from "./SegmentationGroup.js";
 
 class Paragraph extends Component {
   render() {
     return (
       <div className="ca-paragraph">
         {this.props.segmentationGroups.map((g, i) => (
-          <SegmentGroup
+          <SegmentationGroup
             inDictionary={g.in_dictionary}
             segmentations={g.segmentations}
             key={i}

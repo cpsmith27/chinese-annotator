@@ -48,8 +48,9 @@ class Document extends Component {
 }
 
 Document.propTypes = {
-  paragraphs: PropTypes.shape({ segmentation_groups: PropTypes.array })
-    .isRequired
+  paragraphs: PropTypes.arrayOf(
+    PropTypes.shape({ segmentation_groups: PropTypes.array })
+  ).isRequired
 };
 
 export default Document;
