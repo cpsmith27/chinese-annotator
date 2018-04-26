@@ -30,7 +30,7 @@ class Document extends Component {
         <div className="ca-text">
           {this.props.paragraphs.map((p, i) => (
             <Paragraph
-              segmentGroups={p}
+              segmentationGroups={p.segmentation_groups}
               key={i}
               id={"p" + i}
               updateItemStore={this.updateItemStore}
@@ -48,7 +48,8 @@ class Document extends Component {
 }
 
 Document.propTypes = {
-  paragraphs: PropTypes.arrayOf(PropTypes.array).isRequired
+  paragraphs: PropTypes.shape({ segmentation_groups: PropTypes.array })
+    .isRequired
 };
 
 export default Document;

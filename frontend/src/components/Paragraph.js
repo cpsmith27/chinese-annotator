@@ -6,9 +6,10 @@ class Paragraph extends Component {
   render() {
     return (
       <div className="ca-paragraph">
-        {this.props.segmentGroups.map((combinations, i) => (
+        {this.props.segmentationGroups.map((g, i) => (
           <SegmentGroup
-            combinations={combinations}
+            inDictionary={g.in_dictionary}
+            segmentations={g.segmentations}
             key={i}
             id={this.props.id + "sg" + i}
             updateItemStore={this.props.updateItemStore}
@@ -20,7 +21,12 @@ class Paragraph extends Component {
 }
 
 Paragraph.propTypes = {
-  segmentGroups: PropTypes.arrayOf(PropTypes.array).isRequired,
+  segmentationGroups: PropTypes.arrayOf(
+    PropTypes.shape({
+      in_dictionary: PropTypes.bool,
+      segmentations: PropTypes.array
+    })
+  ).isRequired,
   updateItemStore: PropTypes.func.isRequired
 };
 

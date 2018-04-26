@@ -21,6 +21,4 @@ class VocabStore extends Component {
   }
 }
 
-VocabStore.propTypes = {};
-
 export default VocabStore;

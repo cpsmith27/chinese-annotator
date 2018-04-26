@@ -55,11 +55,12 @@ class Segmenter
 
       while wordEnd >= pos
         slice = line[pos..wordEnd]
+        in_dictionary = @dict.entries(slice) != nil
 
         if wordEnd == pos
-          segment_groups << [[slice]]
+          segment_groups << { in_dictionary: in_dictionary, segmentations: [[slice]] }
           break
-        elsif @dict.entries(slice) != nil
+        elsif in_dictionary
           valid_combinations = []
           combinations = compute_combinations(slice)
           combinations.each do |c|
@@ -67,7 +68,7 @@ class Segmenter
               valid_combinations << c
             end
           end
-          segment_groups << valid_combinations
+          segment_groups << { in_dictionary: in_dictionary, segmentations: valid_combinations }
           break
         end
 
@@ -77,6 +78,6 @@ class Segmenter
       pos = wordEnd + 1
     end
 
-    return JSON.generate({text_blocks: [segment_groups]})
+    return JSON.generate(text_blocks: [{segmentation_groups: segment_groups}])
   end
 end
