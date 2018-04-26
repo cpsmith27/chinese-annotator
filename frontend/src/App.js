@@ -1,18 +1,23 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import data from "./data.json";
 
 class App extends Component {
+  getSpans() {
+    console.log(data);
+    let l = data.text_blocks.length;
+    let segs = data.text_blocks;
+    let spans = [];
+    for (var i = 0; i < l; i++) {
+      spans.push(<span key={i}>{segs[i][0]}</span>);
+    }
+
+    return spans;
+  }
+
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <div>{this.getSpans()}</div>
       </div>
     );
   }

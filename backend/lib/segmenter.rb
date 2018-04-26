@@ -77,6 +77,6 @@ class Segmenter
       pos = wordEnd + 1
     end
 
-    return JSON.generate({segmentation: segment_groups})
+    return JSON.generate({text_blocks: segment_groups})
   end
 end
