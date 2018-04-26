@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 class SegmentGroup extends Component {
   constructor(props) {
     super(props);
-    this.current = props.combinations[0].join();
+    this.current = props.combinations[0];
   }
 
   render() {

@@ -8,7 +8,16 @@ class VocabStore extends Component {
   }
 
   render() {
-    return <div className="ca-vocab-store">test</div>;
+    let combinations = Object.values(this.state);
+
+    let items = [];
+    combinations.map(c => c.map(item => items.push(item)));
+    let uniqueItems = Array.from(new Set(items));
+
+    let divs = [];
+    uniqueItems.map((ui, i) => divs.push(<div key={i}>{ui}</div>));
+
+    return <div className="ca-vocab-store">{divs}</div>;
   }
 }
 
