@@ -1,15 +1,47 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Paragraph from "./Paragraph.js";
+import VocabStore from "./VocabStore.js";
 
 class Document extends Component {
+  constructor(props) {
+    super(props);
+    this.updateItemStore = this.tempUpdateItemStore.bind(this);
+    this.tempItemStore = {};
+  }
+
+  tempUpdateItemStore(key, value) {
+    this.tempItemStore[key] = value;
+  }
+  finalUpdateItemStore(key, value) {
+    let item = {};
+    item[key] = value;
+    this.itemStore.setState(item);
+  }
+
+  componentDidMount() {
+    this.itemStore.setState(this.tempItemStore);
+    this.updateItemStore = this.finalUpdateItemStore.bind(this);
+  }
+
   render() {
-    console.log("Document received: " + this.props.paragraphs);
     return (
       <div className="ca-document">
-        {this.props.paragraphs.map((p, i) => (
-          <Paragraph segmentGroups={p} key={i} />
-        ))}
+        <div className="ca-text">
+          {this.props.paragraphs.map((p, i) => (
+            <Paragraph
+              segmentGroups={p}
+              key={i}
+              id={"p" + i}
+              updateItemStore={this.updateItemStore}
+            />
+          ))}
+        </div>
+        <VocabStore
+          ref={instance => {
+            this.itemStore = instance;
+          }}
+        />
       </div>
     );
   }

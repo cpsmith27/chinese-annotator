@@ -4,11 +4,15 @@ import SegmentGroup from "./SegmentGroup.js";
 
 class Paragraph extends Component {
   render() {
-    console.log("Paragraph received: " + this.props.segmentGroups);
     return (
       <div className="ca-paragraph">
         {this.props.segmentGroups.map((combinations, i) => (
-          <SegmentGroup combinations={combinations} key={i} />
+          <SegmentGroup
+            combinations={combinations}
+            key={i}
+            id={this.props.id + "sg" + i}
+            updateItemStore={this.props.updateItemStore}
+          />
         ))}
       </div>
     );
@@ -16,7 +20,8 @@ class Paragraph extends Component {
 }
 
 Paragraph.propTypes = {
-  segmentGroups: PropTypes.arrayOf(PropTypes.array).isRequired
+  segmentGroups: PropTypes.arrayOf(PropTypes.array).isRequired,
+  updateItemStore: PropTypes.func.isRequired
 };
 
 export default Paragraph;
