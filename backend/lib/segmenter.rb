@@ -57,7 +57,7 @@ class Segmenter
         slice = line[pos..wordEnd]
 
         if wordEnd == pos
-          segment_groups << [slice]
+          segment_groups << [[slice]]
           break
         elsif @dict.entries(slice) != nil
           valid_combinations = []
@@ -77,6 +77,6 @@ class Segmenter
       pos = wordEnd + 1
     end
 
-    return JSON.generate({text_blocks: segment_groups})
+    return JSON.generate({text_blocks: [segment_groups]})
   end
 end
