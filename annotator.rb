@@ -11,11 +11,7 @@ class Annotator
   end
 
   def annotate(text)
-    nodes = @seg.segmentMM(text, 5)
-
-    nodes.each do |n|
-      print n.html
-    end
+    @seg.segment(text, 7)
   end
 end
 
