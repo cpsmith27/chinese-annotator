@@ -4,7 +4,7 @@ import data from "./data.json";
 
 class App extends Component {
   render() {
-    return <Document paragraphs={data.text_blocks} />;
+    return <Document textBlocks={data.text_blocks} />;
   }
 }
 

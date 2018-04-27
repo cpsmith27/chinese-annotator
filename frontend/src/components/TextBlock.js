@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import SegmentationGroup from "./SegmentationGroup.js";
 
-class Paragraph extends Component {
+class TextBlock extends Component {
   render() {
     return (
       <div className="ca-paragraph">
@@ -20,7 +20,7 @@ class Paragraph extends Component {
   }
 }
 
-Paragraph.propTypes = {
+TextBlock.propTypes = {
   segmentationGroups: PropTypes.arrayOf(
     PropTypes.shape({
       in_dictionary: PropTypes.bool,
@@ -30,4 +30,4 @@ Paragraph.propTypes = {
   updateItemStore: PropTypes.func.isRequired
 };
 
-export default Paragraph;
+export default TextBlock;

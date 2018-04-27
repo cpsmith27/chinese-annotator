@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Paragraph from "./Paragraph.js";
+import TextBlock from "./TextBlock.js";
 import VocabStore from "./VocabStore.js";
+import { DictionaryProvider } from "./Dictionary.js";
 
 class Document extends Component {
   constructor(props) {
@@ -27,28 +28,30 @@ class Document extends Component {
   render() {
     return (
       <div className="ca-document">
-        <div className="ca-text">
-          {this.props.paragraphs.map((p, i) => (
-            <Paragraph
-              segmentationGroups={p.segmentation_groups}
-              key={i}
-              id={"p" + i}
-              updateItemStore={this.updateItemStore}
-            />
-          ))}
-        </div>
-        <VocabStore
-          ref={instance => {
-            this.itemStore = instance;
-          }}
-        />
+        <DictionaryProvider>
+          <div className="ca-text">
+            {this.props.textBlocks.map((tb, i) => (
+              <TextBlock
+                segmentationGroups={tb.segmentation_groups}
+                key={i}
+                id={"tb" + i}
+                updateItemStore={this.updateItemStore}
+              />
+            ))}
+          </div>
+          <VocabStore
+            ref={instance => {
+              this.itemStore = instance;
+            }}
+          />
+        </DictionaryProvider>
       </div>
     );
   }
 }
 
 Document.propTypes = {
-  paragraphs: PropTypes.arrayOf(
+  textBlocks: PropTypes.arrayOf(
     PropTypes.shape({ segmentation_groups: PropTypes.array })
   ).isRequired
 };
